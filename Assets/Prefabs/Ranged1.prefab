@@ -147,9 +147,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8424827865251099599, guid: 76fa2cdf43935dc439cebcd36cd1657d, type: 3}
   currentState: 0
   eType: 1
-  range: 4
+  range: 8
   speed: 2
-  attackingRange: 2
+  attackingRange: 3
   health: 3
   cd: 2
   danoM: 0

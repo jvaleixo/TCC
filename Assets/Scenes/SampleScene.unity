@@ -505,10 +505,10 @@ MonoBehaviour:
   - {fileID: 1984819598}
   - {fileID: 1848896476}
   rooms:
-  - {fileID: 8260131090995520834, guid: 20b8496da4a330349abffea7ea7748e4, type: 3}
   - {fileID: 8260131090995520834, guid: 2864e8bf132f5cd429564759d11ae6ba, type: 3}
-  - {fileID: 8260131090995520834, guid: f5a0a6445047ac74586ac3e9e3a1b8ae, type: 3}
-  - {fileID: 8260131090995520834, guid: 20b8496da4a330349abffea7ea7748e4, type: 3}
+  - {fileID: 8260131090995520834, guid: 2864e8bf132f5cd429564759d11ae6ba, type: 3}
+  - {fileID: 8260131090995520834, guid: 2864e8bf132f5cd429564759d11ae6ba, type: 3}
+  - {fileID: 8260131090995520834, guid: 2864e8bf132f5cd429564759d11ae6ba, type: 3}
   moveAmount: 20
   startTimeBtwRoom: 0.25
   minX: -30

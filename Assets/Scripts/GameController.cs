@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
     public static int bulletSize;
     
     private static int numeroInimigos =0;
+    private static int numeroInfos = 0;
     private static GameObject[] contador;
     public static int Health{ get => health; set => health = value; }
     public static int MaxHealth { get => maxHealth; set => maxHealth = value; }
@@ -40,20 +41,27 @@ public class GameController : MonoBehaviour
         }
     }
 
+
     // Update is called once per frame
     void Update()
     {
         contador = GameObject.FindGameObjectsWithTag("Enemy");
-        numeroInimigos = contador.Length-34;
+        numeroInimigos = contador.Length;
         Debug.Log(numeroInimigos);
         if (numeroInimigos == 0)
         {
+            numeroInfos++;
             outputJSON();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            health = maxHealth;
         }
     }
-
+    void mudaPosicao()
+    {
+        if (numeroInimigos == 0)
+        {
+            jogador.transform.position = new Vector3(-10, 6, 0);
+            Camera.main.transform.position = new Vector3(-10, 5.8f, -10);
+        }
+    }
     public static void DamagePlayer(int damage,GameObject jogador)
     {
         health -= damage;
@@ -71,7 +79,8 @@ public class GameController : MonoBehaviour
 
     private static void KillPlayer(GameObject jogador)
     {
-        Destroy(jogador); 
+        Destroy(jogador);
+        outputJSON();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         health = maxHealth;
     }
@@ -96,8 +105,8 @@ public class GameController : MonoBehaviour
         infoJogo.curas = PlayerMovement.collectAmount;
         infoJogo.iniM = PlayerMovement.enemyKilled;
         infoJogo.danoI = PlayerMovement.danoI;
-
+        
         string strOutput = JsonUtility.ToJson(infoJogo); //criando a string que sera salva
-        File.WriteAllText(Application.dataPath + "/JSONs/infos.txt", strOutput); //salvando o arquivo na pasta do jogo
+        File.WriteAllText(Application.dataPath + "/JSONs/infos" + numeroInfos + ".txt", strOutput); //salvando o arquivo na pasta do jogo
     }
 }
