@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
     public float range; //distancia em que o inimigo consegue ver o jogador
     public float speed; // velocidade de movimento do inimigo
     public float attackingRange; // distancia de ataque do inimigo
+    public int health; //vida do inimigo
     public float cd; //tempo entre ataque
     public int danoM; //dano melee do inimigo
     private bool chooseDirection = false;
@@ -111,6 +112,15 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     } 
 
+    public void DamageEnemy(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            Death();
+        }
+    }
     public void Attack() //funcao para definir o ataque do inimigo
     {
         if (!cdAttack)

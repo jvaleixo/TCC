@@ -150,6 +150,7 @@ MonoBehaviour:
   range: 4
   speed: 1.5
   attackingRange: 1
+  health: 2
   cd: 0.5
   danoM: 0
 --- !u!50 &3794641630171509552

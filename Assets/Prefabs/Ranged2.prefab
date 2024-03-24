@@ -150,7 +150,8 @@ MonoBehaviour:
   range: 8
   speed: 1
   attackingRange: 4
-  cd: 6
+  health: 5
+  cd: 3
   danoM: 0
 --- !u!50 &3794641630171509552
 Rigidbody2D:

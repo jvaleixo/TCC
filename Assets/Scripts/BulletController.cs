@@ -12,6 +12,7 @@ public class BulletController : MonoBehaviour
     private Vector2 curPos;
     private Vector2 playerPos;
     GameObject player;
+    GameObject enemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +47,7 @@ public class BulletController : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") && !isEnemyBullet)
         {
-            collision.gameObject.GetComponent<EnemyController>().Death(); //chama a funcao de morte do inimigo assim que a bala o atinge
+            collision.gameObject.GetComponent<EnemyController>().DamageEnemy(dano); //chama a funcao de morte do inimigo assim que a bala o atinge
             Destroy(gameObject);   //destroi a bala apos atingir o inimigo
         }
 
