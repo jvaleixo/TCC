@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+
     public static GameController instance;
     
     public GameObject jogador;
@@ -20,6 +22,7 @@ public class GameController : MonoBehaviour
 
     public static int bulletSize;
 
+    private static Vector3 posInicial = new Vector3(-30, 5, 0);
     private static Text healthText;
     public static int Health{ get => health; set => health = value; }
     public static int MaxHealth { get => maxHealth; set => maxHealth = value; }
@@ -39,7 +42,6 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     public static void DamagePlayer(int damage,GameObject jogador)
@@ -65,4 +67,5 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         health = maxHealth;
     }
+    
 }
