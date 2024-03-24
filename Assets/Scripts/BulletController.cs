@@ -8,6 +8,7 @@ public class BulletController : MonoBehaviour
     public float lifetime;
     public bool isEnemyBullet = false;
     public int dano;
+    public int tiro;
     private Vector2 lastPos;
     private Vector2 curPos;
     private Vector2 playerPos;
@@ -49,11 +50,13 @@ public class BulletController : MonoBehaviour
         {
             collision.gameObject.GetComponent<EnemyController>().DamageEnemy(dano); //chama a funcao de morte do inimigo assim que a bala o atinge
             Destroy(gameObject);   //destroi a bala apos atingir o inimigo
+            PlayerMovement.tiros++;
         }
 
         if(collision.CompareTag("Player") && isEnemyBullet)
         {
             GameController.DamagePlayer(dano, player);
+            PlayerMovement.danoI++;
         }
     }
 }

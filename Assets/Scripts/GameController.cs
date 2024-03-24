@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,9 +22,9 @@ public class GameController : MonoBehaviour
     public static float fireRate = 0.5f;
 
     public static int bulletSize;
-
-    private static Vector3 posInicial = new Vector3(-30, 5, 0);
-    private static Text healthText;
+    
+    private static int numeroInimigos =0;
+    private static GameObject[] contador;
     public static int Health{ get => health; set => health = value; }
     public static int MaxHealth { get => maxHealth; set => maxHealth = value; }
     public static float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
@@ -42,6 +43,15 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        contador = GameObject.FindGameObjectsWithTag("Enemy");
+        numeroInimigos = contador.Length-34;
+        Debug.Log(numeroInimigos);
+        if (numeroInimigos == 0)
+        {
+            outputJSON();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            health = maxHealth;
+        }
     }
 
     public static void DamagePlayer(int damage,GameObject jogador)
@@ -52,8 +62,6 @@ public class GameController : MonoBehaviour
         {
             KillPlayer(jogador);
         }
-
-
     }
 
     public static void HealPlayer(int healAmount)
@@ -67,5 +75,29 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         health = maxHealth;
     }
-    
+
+
+    [System.Serializable]
+    public class infos
+    {
+        public int tiros;
+        public int curas;
+        public int iniM;
+        public int danoI;
+        public float tempo;
+    }
+
+    public static infos infoJogo = new infos();
+
+    public static void outputJSON() //escreve um arquivo com essas infos que serao uteis no futuro
+    {
+        infoJogo.tempo = Time.time;
+        infoJogo.tiros = PlayerMovement.tiros;
+        infoJogo.curas = PlayerMovement.collectAmount;
+        infoJogo.iniM = PlayerMovement.enemyKilled;
+        infoJogo.danoI = PlayerMovement.danoI;
+
+        string strOutput = JsonUtility.ToJson(infoJogo); //criando a string que sera salva
+        File.WriteAllText(Application.dataPath + "/JSONs/infos.txt", strOutput); //salvando o arquivo na pasta do jogo
+    }
 }

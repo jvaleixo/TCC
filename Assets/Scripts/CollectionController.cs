@@ -12,7 +12,6 @@ public class CollectionController : MonoBehaviour
 {
     public Item item;
     public int healthChange;
-    private int collAmount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +23,7 @@ public class CollectionController : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            collAmount++;
-            PlayerMovement.collectedAmount(collAmount);
+            PlayerMovement.collectAmount++;
             GameController.HealPlayer(healthChange);
             Destroy(gameObject);
         }

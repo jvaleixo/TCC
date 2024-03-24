@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     private float lastFire; // momento do ultimo tiro
     public float fireDelay; // delay entre os tiros
     public static int collectAmount = 0;
+    public static int enemyKilled = 0;
+    public static int tiros = 0;
+    public static int danoI;
     // Update is called once per frame
     void Update() //inputs do jogador
     {
@@ -56,8 +59,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
-    public static void collectedAmount(int collAmount) //contando quantos items de cura o jogador pegou
-    {
-        collectAmount += collAmount;
-    }
 }

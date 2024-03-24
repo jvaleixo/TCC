@@ -110,6 +110,7 @@ public class EnemyController : MonoBehaviour
     public void Death()//funcao para matar o inimigo
     {
         Destroy(gameObject);
+        PlayerMovement.enemyKilled++;
     } 
 
     public void DamageEnemy(int damage)
