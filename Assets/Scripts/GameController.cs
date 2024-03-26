@@ -26,12 +26,14 @@ public class GameController : MonoBehaviour
     private static int numeroInimigos =0;
     private static int numeroInfos = 0;
     private static GameObject[] contador;
+    //private static string textoVitoria = "Parabéns, você terminou o jogo!";
     public static int Health{ get => health; set => health = value; }
     public static int MaxHealth { get => maxHealth; set => maxHealth = value; }
     public static float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public static float FireRate { get => fireRate; set => fireRate = value; }
 
     
+
     // Start is called before the first frame update
     void Awake()
     { 
@@ -48,20 +50,22 @@ public class GameController : MonoBehaviour
         contador = GameObject.FindGameObjectsWithTag("Enemy");
         numeroInimigos = contador.Length;
         Debug.Log(numeroInimigos);
-        if (numeroInimigos == 0)
+        if (numeroInimigos == 0 && SceneManager.GetActiveScene().name != "Tutorial")
         {
             numeroInfos++;
-            outputJSON();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //chama a proxima cena
+            //outputJSON();
         }
+        
     }
-    void mudaPosicao()
+    /*void mudaPosicao()
     {
         if (numeroInimigos == 0)
         {
             jogador.transform.position = new Vector3(-10, 6, 0);
             Camera.main.transform.position = new Vector3(-10, 5.8f, -10);
         }
-    }
+    }*/
     public static void DamagePlayer(int damage,GameObject jogador)
     {
         health -= damage;
@@ -80,8 +84,8 @@ public class GameController : MonoBehaviour
     private static void KillPlayer(GameObject jogador)
     {
         Destroy(jogador);
-        outputJSON();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //outputJSON();
+        SceneManager.LoadScene("Sala 1");
         health = maxHealth;
     }
 

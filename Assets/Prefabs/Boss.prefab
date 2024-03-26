@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2105149230602136495}
   - component: {fileID: 3794641630171509552}
   m_Layer: 0
-  m_Name: Melee
+  m_Name: Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -31.97, y: 6.17, z: 0}
-  m_LocalScale: {x: 0.99, y: 0.87, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 95019e1dbb284bd49bd931c2b35dc776, type: 3}
-  m_Color: {r: 0.20192799, g: 0.030950464, b: 0.6075471, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 8e0a560b7df050a49b58a01743d64c38, type: 3}
+  m_Color: {r: 0.96981126, g: 0, b: 0.05876251, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -123,7 +123,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.67, y: 0.73}
+    oldSize: {x: 0.91, y: 0.95}
     newSize: {x: 0.67, y: 0.73}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -144,14 +144,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267fc8db82893364087ef8c169c024b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8424827865251099599, guid: d9cd34c8c1425f044ab656bd59267736, type: 3}
+  bulletPrefab: {fileID: 8424827865251099599, guid: 462a9b8738acc654da7c9c61b57612b1, type: 3}
   currentState: 0
   eType: 1
-  range: 15
-  speed: 5
-  attackingRange: 1
-  health: 2
-  cd: 0.5
+  range: 8
+  speed: 4
+  attackingRange: 6
+  health: 15
+  cd: 2
   danoM: 0
 --- !u!50 &3794641630171509552
 Rigidbody2D:
