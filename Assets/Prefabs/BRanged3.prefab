@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508fd2b82598b69449b8ba181b744901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 5
+  lifetime: 8
   isEnemyBullet: 0
   dano: 3
   tiro: 0

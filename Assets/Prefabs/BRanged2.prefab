@@ -101,7 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 5
   isEnemyBullet: 0
-  dano: 3
+  dano: 2
+  tiro: 0
 --- !u!61 &6552997347150777538
 BoxCollider2D:
   m_ObjectHideFlags: 0
