@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2105149230602136495}
   - component: {fileID: 3794641630171509552}
   m_Layer: 0
-  m_Name: Ranged1
+  m_Name: Melee1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 95019e1dbb284bd49bd931c2b35dc776, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.20192799, g: 0.030950464, b: 0.6075471, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -144,13 +144,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267fc8db82893364087ef8c169c024b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8424827865251099599, guid: 76fa2cdf43935dc439cebcd36cd1657d, type: 3}
+  bulletPrefab: {fileID: 8424827865251099599, guid: d9cd34c8c1425f044ab656bd59267736, type: 3}
   currentState: 0
   eType: 1
-  range: 8
-  speed: 2
-  attackingRange: 6
-  health: 3
+  range: 15
+  speed: 3.5
+  attackingRange: 1
+  health: 2
   cd: 2
   danoM: 0
 --- !u!50 &3794641630171509552

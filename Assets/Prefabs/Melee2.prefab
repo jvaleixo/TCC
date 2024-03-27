@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2105149230602136495}
   - component: {fileID: 3794641630171509552}
   m_Layer: 0
-  m_Name: Melee
+  m_Name: Melee2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 95019e1dbb284bd49bd931c2b35dc776, type: 3}
-  m_Color: {r: 0.20192799, g: 0.030950464, b: 0.6075471, a: 1}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   speed: 5
   attackingRange: 1
   health: 2
-  cd: 0.5
+  cd: 1
   danoM: 0
 --- !u!50 &3794641630171509552
 Rigidbody2D:

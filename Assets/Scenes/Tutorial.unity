@@ -1077,7 +1077,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 719192049}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: AbrirSala1
+        m_MethodName: StartG
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

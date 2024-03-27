@@ -75,10 +75,10 @@ public class EnemyController : MonoBehaviour
     private IEnumerator ChooseDirection() //define uma direcao aleatoria para o inimigo a cada intervalo de tempo
     {
         chooseDirection = true;
-        yield return new WaitForSeconds(Random.Range(1f, 3f));
+        yield return new WaitForSeconds(Random.Range(1f, 5f));
         randomDir = new Vector3(0, 0, Random.Range(0, 360));
         Quaternion nextRotation = Quaternion.Euler(randomDir);
-        transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, Random.Range(0.5f, 2.5f));
+        transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, Random.Range(0.5f, 3f));
         chooseDirection = false;
     }
 

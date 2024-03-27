@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
     
     private static int numeroInimigos =0;
     private static int numeroInfos = 0;
+    private static float tempo = 0;
     private static GameObject[] contador;
     //private static string textoVitoria = "Parabéns, você terminou o jogo!";
     public static int Health{ get => health; set => health = value; }
@@ -49,23 +50,34 @@ public class GameController : MonoBehaviour
     {
         contador = GameObject.FindGameObjectsWithTag("Enemy");
         numeroInimigos = contador.Length;
-        Debug.Log(numeroInimigos);
-        if (numeroInimigos == 0 && SceneManager.GetActiveScene().name != "Tutorial")
+        //tempo = Time.time - tempoaux;
+        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2"))
         {
             numeroInfos++;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //chama a proxima cena
-            //outputJSON();
+            //Random.RandomRange() //escolhe aleatorio entre as salas medias
+            SceneManager.LoadScene("Medio"); //chama a proxima cena
+            outputJSON();
         }
-        
-    }
-    /*void mudaPosicao()
-    {
-        if (numeroInimigos == 0)
+        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2"))
         {
-            jogador.transform.position = new Vector3(-10, 6, 0);
-            Camera.main.transform.position = new Vector3(-10, 5.8f, -10);
+            numeroInfos++;
+            //Random.RandomRange() //escolhe aleatorio entre as salas medias
+            SceneManager.LoadScene("Dificil"); //chama a proxima cena
+            outputJSON();
         }
-    }*/
+        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2"))
+        {
+            numeroInfos++;
+            SceneManager.LoadScene("Boss"); //chama a proxima cena
+            outputJSON();
+        }
+        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Boss"))
+        {
+            numeroInfos++;
+            SceneManager.LoadScene("Final"); //chama a proxima cena
+            outputJSON();
+        }
+    }
     public static void DamagePlayer(int damage,GameObject jogador)
     {
         health -= damage;
@@ -85,7 +97,7 @@ public class GameController : MonoBehaviour
     {
         Destroy(jogador);
         //outputJSON();
-        SceneManager.LoadScene("Sala 1");
+        SceneManager.LoadScene("Tutorial");
         health = maxHealth;
     }
 
@@ -111,6 +123,6 @@ public class GameController : MonoBehaviour
         infoJogo.danoI = PlayerMovement.danoI;
         
         string strOutput = JsonUtility.ToJson(infoJogo); //criando a string que sera salva
-        File.WriteAllText(Application.dataPath + "/JSONs/infos" + numeroInfos + ".txt", strOutput); //salvando o arquivo na pasta do jogo
+        File.WriteAllText(Application.dataPath + "/JSONs/infos.txt", strOutput); //salvando o arquivo na pasta do jogo
     }
 }
