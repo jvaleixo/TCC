@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     
     private static int numeroInimigos =0;
     private static int numeroInfos = 0;
-    private static float tempo = 0;
+    //private static float tempo = 0;
     private static GameObject[] contador;
     //private static string textoVitoria = "Parabéns, você terminou o jogo!";
     public static int Health{ get => health; set => health = value; }
@@ -48,27 +48,107 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float time = Time.timeSinceLevelLoad; //tempo desde o carregamento da sala
         contador = GameObject.FindGameObjectsWithTag("Enemy");
         numeroInimigos = contador.Length;
-        //tempo = Time.time - tempoaux;
-        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2"))
-        {
+        Debug.Log("tempo:"+time);
+        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2" || SceneManager.GetActiveScene().name == "Facil 3") && time <= 3)
+        { //logica para salas faceis
             numeroInfos++;
-            //Random.RandomRange() //escolhe aleatorio entre as salas medias
-            SceneManager.LoadScene("Medio"); //chama a proxima cena
+            int rand = Random.Range(0,3); //escolhe aleatorio entre as salas medias
+            Debug.Log("rand:" + rand);
+            switch (rand)//chama a proxima cena aleatoriamente
+            {
+                case (1):
+                SceneManager.LoadScene("Medio");
+                    break;
+                case (2):
+                SceneManager.LoadScene("Medio 2");
+                    break;
+                case (3):
+                SceneManager.LoadScene("Medio 3");
+                    break;
+            } 
             outputJSON();
         }
-        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2"))
+        else if(numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2" || SceneManager.GetActiveScene().name == "Facil 3") && time > 3)
         {
             numeroInfos++;
-            //Random.RandomRange() //escolhe aleatorio entre as salas medias
-            SceneManager.LoadScene("Dificil"); //chama a proxima cena
+            int rand = Random.Range(0, 3); //escolhe aleatorio entre as salas medias
+            Debug.Log("rand:" + rand);
+            switch (rand)//chama a proxima cena aleatoriamente
+            {
+                case (1):
+                    SceneManager.LoadScene("Facil");
+                    break;
+                case (2):
+                    SceneManager.LoadScene("Facil 2");
+                    break;
+                case (3):
+                    SceneManager.LoadScene("Facil 3");
+                    break;
+            }
             outputJSON();
         }
-        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2"))
+        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time <= 5)
+        { //logica salas medias
+            numeroInfos++;
+            int rand = Random.Range(0, 3); //escolhe aleatorio entre as salas medias
+            Debug.Log("rand:" + rand);
+            switch (rand)//chama a proxima cena aleatoriamente
+            {
+                case (1):
+                    SceneManager.LoadScene("Dificil");
+                    break;
+                case (2):
+                    SceneManager.LoadScene("Dificil 2");
+                    break;
+                case (3):
+                    SceneManager.LoadScene("Dificil 3");
+                    break;
+            }
+            outputJSON();
+        } else if(numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time > 5)
+        {
+            numeroInfos++;
+            int rand = Random.Range(0, 3); //escolhe aleatorio entre as salas medias
+            Debug.Log("rand:" + rand);
+            switch (rand)//chama a proxima cena aleatoriamente
+            {
+                case (1):
+                    SceneManager.LoadScene("Medio");
+                    break;
+                case (2):
+                    SceneManager.LoadScene("Medio 2");
+                    break;
+                case (3):
+                    SceneManager.LoadScene("Medio 3");
+                    break;
+            }
+            outputJSON();
+        }
+        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3") && time <= 8)
         {
             numeroInfos++;
             SceneManager.LoadScene("Boss"); //chama a proxima cena
+            outputJSON();
+        } else if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3") && time > 8)
+        {
+            numeroInfos++;
+            int rand = Random.Range(0, 3); //escolhe aleatorio entre as salas medias
+            Debug.Log("rand:" + rand);
+            switch (rand)//chama a proxima cena aleatoriamente
+            {
+                case (1):
+                    SceneManager.LoadScene("Dificil");
+                    break;
+                case (2):
+                    SceneManager.LoadScene("Dificil 2");
+                    break;
+                case (3):
+                    SceneManager.LoadScene("Dificil 3");
+                    break;
+            }
             outputJSON();
         }
         if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Boss"))
@@ -96,9 +176,10 @@ public class GameController : MonoBehaviour
     private static void KillPlayer(GameObject jogador)
     {
         Destroy(jogador);
-        //outputJSON();
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         health = maxHealth;
+        outputJSON();
+       
     }
 
 
