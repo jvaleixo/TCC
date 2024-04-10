@@ -1,1 +1,1 @@
-{"tiros":4,"curas":0,"iniM":2,"danoI":1,"tempo":8.931805610656739}
+{"tiros":6,"curas":0,"iniM":3,"danoI":5,"tempo":11.399999618530274}

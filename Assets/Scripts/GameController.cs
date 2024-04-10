@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour
         float time = Time.timeSinceLevelLoad; //tempo desde o carregamento da sala
         contador = GameObject.FindGameObjectsWithTag("Enemy");
         numeroInimigos = contador.Length;
+        int nivelfaseAtual; //nivel da fase
         Debug.Log("tempo:"+time);
         if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2" || SceneManager.GetActiveScene().name == "Facil 3") && time <= 3)
         { //logica para salas faceis
@@ -69,7 +70,7 @@ public class GameController : MonoBehaviour
                 SceneManager.LoadScene("Medio 3");
                     break;
             } 
-            outputJSON();
+            outputJSON(); //adicionar ao case
         }
         else if(numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2" || SceneManager.GetActiveScene().name == "Facil 3") && time > 3)
         {
@@ -108,7 +109,7 @@ public class GameController : MonoBehaviour
                     break;
             }
             outputJSON();
-        } else if(numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time > 5)
+        } else if(numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time > 5 )
         {
             numeroInfos++;
             int rand = Random.Range(0, 3); //escolhe aleatorio entre as salas medias
@@ -175,10 +176,11 @@ public class GameController : MonoBehaviour
 
     private static void KillPlayer(GameObject jogador)
     {
-        Destroy(jogador);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        health = maxHealth;
         outputJSON();
+        Destroy(jogador);
+        SceneManager.LoadScene("Tutorial"); //criar cena de morte do jogador
+        health = maxHealth;
+        
        
     }
 
@@ -197,11 +199,12 @@ public class GameController : MonoBehaviour
 
     public static void outputJSON() //escreve um arquivo com essas infos que serao uteis no futuro
     {
-        infoJogo.tempo = Time.time;
+        infoJogo.tempo = Time.timeSinceLevelLoad;
         infoJogo.tiros = PlayerMovement.tiros;
         infoJogo.curas = PlayerMovement.collectAmount;
         infoJogo.iniM = PlayerMovement.enemyKilled;
         infoJogo.danoI = PlayerMovement.danoI;
+        //.morte
         
         string strOutput = JsonUtility.ToJson(infoJogo); //criando a string que sera salva
         File.WriteAllText(Application.dataPath + "/JSONs/infos.txt", strOutput); //salvando o arquivo na pasta do jogo

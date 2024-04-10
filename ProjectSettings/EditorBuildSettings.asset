@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Facil 2.unity
     guid: 539c05e2a985b6c458e136e53e37142c
   - enabled: 1
+    path: Assets/Scenes/Medio 3.unity
+    guid: 4a8987b9427df2c4ea04e4e9d4c83f48
+  - enabled: 1
     path: Assets/Scenes/Medio.unity
     guid: e954a4ed85708db40829c227f245c9a0
   - enabled: 1
@@ -38,9 +41,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Sala 6.unity
     guid: 3e7ede8cccce35e4e8079c72bf4c4940
-  - enabled: 1
-    path: Assets/Scenes/Medio 3.unity
-    guid: 4a8987b9427df2c4ea04e4e9d4c83f48
   - enabled: 1
     path: Assets/Scenes/Facil 3.unity
     guid: 284dd0f90e61fdf4d912a3deb3c7fb54
