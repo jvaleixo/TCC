@@ -1,1 +1,1 @@
-{"tiros":6,"curas":0,"iniM":3,"danoI":5,"tempo":11.399999618530274}
+{"tiros":4,"curas":0,"iniM":2,"danoI":5,"tempo":2.821141242980957,"mortes":0}

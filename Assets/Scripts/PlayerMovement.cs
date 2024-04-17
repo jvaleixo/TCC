@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     public static int enemyKilled = 0;
     public static int tiros = 0;
     public static int danoI;
+    public static int health = 6;
+    public static int maxHealth = 6;
     // Update is called once per frame
     void Update() //inputs do jogador
     {

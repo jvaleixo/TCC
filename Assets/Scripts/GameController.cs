@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour
     private static int numeroInimigos =0;
     private static int numeroInfos = 0;
     //private static float tempo = 0;
+    private static int contadorMortes = 0;
+    private int nivelfaseAtual; //nivel da fase 1-facil; 2-medio ; 3-dificil
     private static GameObject[] contador;
     //private static string textoVitoria = "Parabéns, você terminou o jogo!";
     public static int Health{ get => health; set => health = value; }
@@ -51,105 +53,62 @@ public class GameController : MonoBehaviour
         float time = Time.timeSinceLevelLoad; //tempo desde o carregamento da sala
         contador = GameObject.FindGameObjectsWithTag("Enemy");
         numeroInimigos = contador.Length;
-        int nivelfaseAtual; //nivel da fase
-        Debug.Log("tempo:"+time);
+        if (PlayerMovement.health <= 0) //verifica se o jogador foi morto
+        {
+            outputJSON();
+            Destroy(jogador);
+            contaMortes();
+            SceneManager.LoadScene("Tutorial");
+            PlayerMovement.health = PlayerMovement.maxHealth;
+        }
         if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2" || SceneManager.GetActiveScene().name == "Facil 3") && time <= 3)
         { //logica para salas faceis
             numeroInfos++;
-            int rand = Random.Range(0,3); //escolhe aleatorio entre as salas medias
-            Debug.Log("rand:" + rand);
-            switch (rand)//chama a proxima cena aleatoriamente
-            {
-                case (1):
-                SceneManager.LoadScene("Medio");
-                    break;
-                case (2):
-                SceneManager.LoadScene("Medio 2");
-                    break;
-                case (3):
-                SceneManager.LoadScene("Medio 3");
-                    break;
-            } 
+            contadorMortes = 0;
+            int rand = Random.Range(5,7); //escolhe aleatorio entre as salas medias
+            SceneManager.LoadScene(rand);
+              
             outputJSON(); //adicionar ao case
         }
         else if(numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2" || SceneManager.GetActiveScene().name == "Facil 3") && time > 3)
         {
             numeroInfos++;
-            int rand = Random.Range(0, 3); //escolhe aleatorio entre as salas medias
-            Debug.Log("rand:" + rand);
-            switch (rand)//chama a proxima cena aleatoriamente
-            {
-                case (1):
-                    SceneManager.LoadScene("Facil");
-                    break;
-                case (2):
-                    SceneManager.LoadScene("Facil 2");
-                    break;
-                case (3):
-                    SceneManager.LoadScene("Facil 3");
-                    break;
-            }
+            int rand = Random.Range(2, 4); //escolhe aleatorio entre as salas faceis
+
+            SceneManager.LoadScene(rand);
             outputJSON();
         }
         if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time <= 5)
         { //logica salas medias
             numeroInfos++;
-            int rand = Random.Range(0, 3); //escolhe aleatorio entre as salas medias
-            Debug.Log("rand:" + rand);
-            switch (rand)//chama a proxima cena aleatoriamente
-            {
-                case (1):
-                    SceneManager.LoadScene("Dificil");
-                    break;
-                case (2):
-                    SceneManager.LoadScene("Dificil 2");
-                    break;
-                case (3):
-                    SceneManager.LoadScene("Dificil 3");
-                    break;
-            }
+            contadorMortes = 0;
+            int rand = Random.Range(8, 10); //escolhe aleatorio entre as salas dificeis
+            SceneManager.LoadScene(rand);
             outputJSON();
         } else if(numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time > 5 )
         {
             numeroInfos++;
-            int rand = Random.Range(0, 3); //escolhe aleatorio entre as salas medias
-            Debug.Log("rand:" + rand);
-            switch (rand)//chama a proxima cena aleatoriamente
-            {
-                case (1):
-                    SceneManager.LoadScene("Medio");
-                    break;
-                case (2):
-                    SceneManager.LoadScene("Medio 2");
-                    break;
-                case (3):
-                    SceneManager.LoadScene("Medio 3");
-                    break;
-            }
+            contadorMortes = 0;
+            int rand = Random.Range(5, 7); //escolhe aleatorio entre as salas medias
+
+            SceneManager.LoadScene(rand);
             outputJSON();
         }
         if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3") && time <= 8)
         {
             numeroInfos++;
+            contadorMortes = 0;
             SceneManager.LoadScene("Boss"); //chama a proxima cena
             outputJSON();
         } else if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3") && time > 8)
         {
             numeroInfos++;
-            int rand = Random.Range(0, 3); //escolhe aleatorio entre as salas medias
-            Debug.Log("rand:" + rand);
-            switch (rand)//chama a proxima cena aleatoriamente
-            {
-                case (1):
-                    SceneManager.LoadScene("Dificil");
-                    break;
-                case (2):
-                    SceneManager.LoadScene("Dificil 2");
-                    break;
-                case (3):
-                    SceneManager.LoadScene("Dificil 3");
-                    break;
-            }
+
+            numeroInfos++;
+            contadorMortes = 0;
+            int rand = Random.Range(8, 10); //escolhe aleatorio entre as salas medias
+
+            SceneManager.LoadScene(rand);
             outputJSON();
         }
         if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Boss"))
@@ -161,41 +120,33 @@ public class GameController : MonoBehaviour
     }
     public static void DamagePlayer(int damage,GameObject jogador)
     {
-        health -= damage;
-
-        if(Health <= 0)
-        {
-            KillPlayer(jogador);
-        }
+        PlayerMovement.health -= damage;
     }
+   
 
     public static void HealPlayer(int healAmount)
     {
-        health = Mathf.Min(maxHealth, health + healAmount);
+        PlayerMovement.health = Mathf.Min(PlayerMovement.maxHealth, PlayerMovement.health + healAmount);
     }
 
-    private static void KillPlayer(GameObject jogador)
+    public static void contaMortes()
     {
-        outputJSON();
-        Destroy(jogador);
-        SceneManager.LoadScene("Tutorial"); //criar cena de morte do jogador
-        health = maxHealth;
-        
-       
+        contadorMortes++;
     }
 
 
     [System.Serializable]
-    public class infos
+    public class Infos
     {
         public int tiros;
         public int curas;
         public int iniM;
         public int danoI;
         public float tempo;
+        public int mortes;
     }
 
-    public static infos infoJogo = new infos();
+    public static Infos infoJogo = new Infos();
 
     public static void outputJSON() //escreve um arquivo com essas infos que serao uteis no futuro
     {
@@ -204,9 +155,9 @@ public class GameController : MonoBehaviour
         infoJogo.curas = PlayerMovement.collectAmount;
         infoJogo.iniM = PlayerMovement.enemyKilled;
         infoJogo.danoI = PlayerMovement.danoI;
-        //.morte
+        infoJogo.mortes = contadorMortes;
         
         string strOutput = JsonUtility.ToJson(infoJogo); //criando a string que sera salva
-        File.WriteAllText(Application.dataPath + "/JSONs/infos.txt", strOutput); //salvando o arquivo na pasta do jogo
+        File.WriteAllText(Application.dataPath + "/infos.txt", strOutput); //salvando o arquivo na pasta do jogo
     }
 }

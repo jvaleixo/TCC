@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BulletController : MonoBehaviour
 {
@@ -57,6 +58,7 @@ public class BulletController : MonoBehaviour
         {
             GameController.DamagePlayer(dano, player);
             PlayerMovement.danoI++;
+            //GameController.KillPlayer(player);
         }
     }
 }
