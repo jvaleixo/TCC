@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     public void StartG()
     {
         SceneManager.LoadScene("Facil");
+        GameController.definirFaseAtual(1);
     }
 
     public void QuitGame()
