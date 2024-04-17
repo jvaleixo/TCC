@@ -78,14 +78,14 @@ public class GameController : MonoBehaviour
             SceneManager.LoadScene(rand);
             outputJSON();
         }
-        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time <= 5)
+        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time <= 8)
         { //logica salas medias
             numeroInfos++;
             contadorMortes = 0;
             int rand = Random.Range(8, 10); //escolhe aleatorio entre as salas dificeis
             SceneManager.LoadScene(rand);
             outputJSON();
-        } else if(numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time > 5 )
+        } else if(numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time > 8 )
         {
             numeroInfos++;
             contadorMortes = 0;
@@ -94,13 +94,13 @@ public class GameController : MonoBehaviour
             SceneManager.LoadScene(rand);
             outputJSON();
         }
-        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3") && time <= 8)
+        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3") && time <= 10)
         {
             numeroInfos++;
             contadorMortes = 0;
             SceneManager.LoadScene("Boss"); //chama a proxima cena
             outputJSON();
-        } else if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3") && time > 8)
+        } else if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3") && time > 10)
         {
             numeroInfos++;
 
