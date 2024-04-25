@@ -30,9 +30,9 @@ public class GameController : MonoBehaviour
     private static int mortesF = 0;
     private static int mortesM = 0;
     private static int mortesD = 0;
-    public static int nivelfaseAtual; //nivel da fase 1-facil; 2-medio ; 3-dificil
+    public static int fasesJogadas = 1; //conta quantas fases o jogador já passou
     private static GameObject[] contador;
-    //private static string textoVitoria = "Parabéns, você terminou o jogo!";
+    
     public static int Health{ get => health; set => health = value; }
     public static int MaxHealth { get => maxHealth; set => maxHealth = value; }
     public static float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
@@ -61,88 +61,20 @@ public class GameController : MonoBehaviour
             outputJSON();
             Destroy(jogador);
             contadorMortes++;
-            if (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2" || SceneManager.GetActiveScene().name == "Facil 3")
-            {
-                mortesF++;
-                int rand = Random.Range(2, 5); //escolhe aleatorio entre as salas faceis
-                SceneManager.LoadScene(rand);
-            }
-            if (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3")
-            {
-                mortesM++;
-                int rand = Random.Range(5, 8); //escolhe aleatorio entre as salas medias
-                SceneManager.LoadScene(rand);
-            }
-            if (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3")
-            {
-                mortesD++;
-                int rand = Random.Range(8, 11); //escolhe aleatorio entre as salas dificeis
-                SceneManager.LoadScene(rand);
-            }
-            if(SceneManager.GetActiveScene().name == "Boss")
-            {
-                SceneManager.LoadScene("Tutorial");
-            }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             PlayerMovement.health = PlayerMovement.maxHealth;
         }
-        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2" || SceneManager.GetActiveScene().name == "Facil 3") && time <= 3)
-        { //logica para salas faceis
-            //contadorMortes = 0;
-            int rand = Random.Range(5,8); //escolhe aleatorio entre as salas medias
+        if (numeroInimigos == 0 && SceneManager.GetActiveScene().name != "Tutorial" && SceneManager.GetActiveScene().name != "Final")
+        { //logica para seleção aleatória de fases
+            fasesJogadas++;
+            Debug.Log(fasesJogadas);
+            int rand = Random.Range(2,11); //escolhe aleatorio entre qualquer nivel de fase
             SceneManager.LoadScene(rand);
-            //nivelfaseAtual = 2;
             outputJSON(); //adicionar ao case
         }
-        else if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2" || SceneManager.GetActiveScene().name == "Facil 3") && time > 3)
+        if (numeroInimigos == 0 && fasesJogadas == 4)
         {
-            int rand = Random.Range(2, 5); //escolhe aleatorio entre as salas faceis
-            //nivelfaseAtual = 1;
-            SceneManager.LoadScene(rand);
-            outputJSON();
-        }
-        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time <= 10)
-        { //logica salas medias
-            //contadorMortes = 0;
-            int rand = Random.Range(8, 11); //escolhe aleatorio entre as salas dificeis
-            SceneManager.LoadScene(rand);
-            //nivelfaseAtual = 3;
-            outputJSON();
-        } 
-        else if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && time > 10)
-        {
-            //contadorMortes = 0;
-            int rand = Random.Range(5, 8); //escolhe aleatorio entre as salas medias
-            SceneManager.LoadScene(rand);
-            //nivelfaseAtual = 2;
-            outputJSON();
-        }
-        else if ((SceneManager.GetActiveScene().name == "Medio" || SceneManager.GetActiveScene().name == "Medio 2" || SceneManager.GetActiveScene().name == "Medio 3") && mortesM > 5)
-        {
-            //contadorMortes = 0;
-            int rand = Random.Range(2, 5); //escolhe aleatorio entre as salas faceis
-            SceneManager.LoadScene(rand);
-            //nivelfaseAtual = 2;
-            outputJSON();
-        }
-        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3") && time <= 15)
-        {
-            //contadorMortes = 0;
             SceneManager.LoadScene("Boss"); //chama a proxima cena
-            outputJSON();
-        } else if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3") && time > 15)
-        {
-            //contadorMortes = 0;
-            int rand = Random.Range(8, 11); //escolhe aleatorio entre as salas dificeis
-            SceneManager.LoadScene(rand);
-            //nivelfaseAtual = 3;
-            outputJSON();
-        }
-        else if ((SceneManager.GetActiveScene().name == "Dificil" || SceneManager.GetActiveScene().name == "Dificil 2" || SceneManager.GetActiveScene().name == "Dificil 3") && mortesD > 5)
-        {
-            //contadorMortes = 0;
-            int rand = Random.Range(5, 8); //escolhe aleatorio entre as salas medias
-            SceneManager.LoadScene(rand);
-            //nivelfaseAtual = 3;
             outputJSON();
         }
         if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Boss"))
@@ -150,16 +82,15 @@ public class GameController : MonoBehaviour
             SceneManager.LoadScene("Final"); //chama a proxima cena
             outputJSON();
         }
-        
+        if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Final"))
+        {
+            
+            outputJSON();
+        }
     }
     public static void DamagePlayer(int damage,GameObject jogador)
     {
         PlayerMovement.health -= damage;
-    }
-   
-    public static void definirFaseAtual(int nivel)
-    {
-        nivelfaseAtual = nivel;
     }
     public static void HealPlayer(int healAmount)
     {
