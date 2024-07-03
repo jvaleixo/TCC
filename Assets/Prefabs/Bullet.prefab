@@ -102,6 +102,7 @@ MonoBehaviour:
   lifetime: 1
   isEnemyBullet: 0
   dano: 1
+  tiro: 0
 --- !u!61 &6552997347150777538
 BoxCollider2D:
   m_ObjectHideFlags: 0

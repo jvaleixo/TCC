@@ -1,1 +1,1 @@
-{"tiros":0,"curas":0,"iniM":0,"danoI":6,"tempo":2.167430877685547,"mortes":0,"mortesF":0,"mortesM":0,"mortesD":0}
+{"tiros":119,"curas":3,"iniM":37,"danoI":4,"tempo":19.286842346191408,"mortes":0,"mortesF":0,"mortesM":0,"mortesD":0}

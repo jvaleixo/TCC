@@ -92,7 +92,7 @@ public class GameController : MonoBehaviour
             SceneManager.LoadScene(rand);
             //nivelfaseAtual = 2;
             outputJSON(); //adicionar ao case
-        }
+        } 
         else if (numeroInimigos == 0 && (SceneManager.GetActiveScene().name == "Facil" || SceneManager.GetActiveScene().name == "Facil 2" || SceneManager.GetActiveScene().name == "Facil 3") && time > 3)
         {
             int rand = Random.Range(2, 5); //escolhe aleatorio entre as salas faceis
